@@ -15,6 +15,13 @@ const app = express()
 app.use(cors({origin: 'http://localhost:3000'}))
 app.use(express.json())
 
+app.use(async(req, res, next)=>{
+    const token = req.headers['authorization']
+    console.log("token", token)
+    next()
+})
+
+
 const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
