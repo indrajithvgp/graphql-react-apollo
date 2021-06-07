@@ -1,6 +1,7 @@
 type Query{
     getAllRecipes: [Recipe]
-    user: User
+    getCurrentUser: User
+
 }
 
 type Recipe{
@@ -25,7 +26,8 @@ type User{
 }
 
 type Token{
-    token: String!
+    token: String! 
+
 }
 
 type Mutation{

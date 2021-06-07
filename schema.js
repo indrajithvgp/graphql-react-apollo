@@ -2,7 +2,7 @@ exports.typeDefs = `
 
 type Query{
     getAllRecipes: Recipe!
-    user: User!
+    getCurrentUser: User!
 }
 
 type Recipe{
