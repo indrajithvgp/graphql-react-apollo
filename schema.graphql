@@ -1,11 +1,12 @@
 type Query{
     getAllRecipes: [Recipe]
     getCurrentUser: User
+    getRecipe(_id: ID!): Recipe
 
 }
 
 type Recipe{
-    _id: ID!
+    _id: ID! 
     name: String!
     category: String!
     description: String!

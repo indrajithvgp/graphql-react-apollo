@@ -11,7 +11,9 @@ exports.resolvers = {
     Query:{
         getAllRecipes:async(root, args, ctx, info)=>{
             const {Recipe} = ctx
-            const allRecipes = await Recipe.find()
+            const allRecipes = await Recipe.find().sort({
+                createdAt: -1
+            })
             return allRecipes
         },
         getCurrentUser: async(root, args, {currentUser, User}, info)=>{
@@ -26,6 +28,10 @@ exports.resolvers = {
                     model: 'Recipe'
                 })
             return user
+        },
+        getRecipe: async(root, {_id}, {Recipe}) => {
+            const recipe = await Recipe.findOne({_id})
+            return recipe
         }
     },
     Recipe:{
