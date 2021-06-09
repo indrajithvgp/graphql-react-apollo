@@ -32,6 +32,29 @@ exports.resolvers = {
         getRecipe: async(root, {_id}, {Recipe}) => {
             const recipe = await Recipe.findOne({_id})
             return recipe
+        },
+        getUserRecipes:async(root, {username}, {Recipe})=>{
+            const userRecipes = await Recipe.find({username}).sort({
+                createdAt: -1
+            })
+            return userRecipes
+        },
+        searchRecipes: async(root, {searchTerm}, {Recipe}) => {
+            if(searchTerm){
+                const searchResults = await Recipe.find({name: searchTerm})
+                // const searchResults = await Recipe.find({
+                //     $text: {$search: searchTerm}
+                // },{
+                //     score:{$meta: "textScore"}
+                // }).sort({
+                //     score:{$meta: "textScore"}
+                // })
+                return searchResults
+            }else{
+                const recipes = await Recipe.find()
+                                .sort({likes: -1, createdAt: -1})
+                return recipes
+            }
         }
     },
     Recipe:{
